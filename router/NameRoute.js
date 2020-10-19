@@ -28,35 +28,34 @@ router.post('/User', async (req,res)=>{
     })
 
 
-    //Update the record using id
-    router.put('/User/:id', async (req,res)=>{
+//Update the record using id
+router.put('/User/:id', async (req,res)=>{
        
-        const UpdatedResult =  {
-            name: req.body.name,
-            age:req.body.age
-        }
-        console.log(req.params.id+"   id")
-      
-      let result = await NameSchema.findByIdAndUpdate(req.params.id,  
-        UpdatedResult,{new:true}, function (err, docs) { 
-        if (err){ 
-            console.log(err) 
-        } 
-        else{ 
-            console.log("Original Doc : ",docs); 
-            res.send(docs)
-        } 
+    const UpdatedResult =  {
+        name: req.body.name,
+        age:req.body.age
+    }
+
+    let result = await NameSchema.findByIdAndUpdate(req.params.id,  
+    UpdatedResult,{new:true}, function (err, docs) { 
+    if (err){ 
+        console.log(err) 
+    } 
+    else{ 
+        console.log("Original Doc : ",docs); 
+        res.send(docs)
+    } 
     }); 
     console.log(result+"this is result")
-        })
+})
 
 
-
-        router.delete('/User/:id',async (req,res)=>{
-            const UserName =  await NameSchema.findByIdAndDelete(req.params.id);
-            res.json(UserName)
-            console.log(UserName)
-           
-            })
+//delete the record using id
+router.delete('/tUser/:id',async (req,res)=>{
+    const UserName =  await NameSchema.findByIdAndDelete(req.params.id);
+    res.json(UserName)
+    console.log(UserName)
+    
+})
         
 module.exports = router;
